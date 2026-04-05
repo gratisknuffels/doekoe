@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wie wordt Millionair?</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #f0c040;
+    --gold-light: #ffe080;
+    --gold-dark: #b8860b;
+    --blue-deep: #000833;
+    --blue-mid: #001560;
+    --blue-bright: #0033cc;
+    --silver: #c0c8d8;
+    --white: #f8f4e8;
+    --correct: #00cc44;
+    --wrong: #cc2200;
+    --used: #556;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--blue-deep);
+    font-family: 'Cinzel', serif;
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  /* Starfield */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 45%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 75%, rgba(240,192,64,0.5) 0%, transparent 100%),
+      radial-gradient(2px 2px at 15% 10%, rgba(240,192,64,0.4) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #screen-start, #screen-game, #screen-end {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- START SCREEN ---- */
+  #screen-start {
+    text-align: center;
+  }
+
+  .logo {
+    margin-bottom: 30px;
+  }
+
+  .logo-main {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 5vw, 3rem);
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    line-height: 1.2;
+    letter-spacing: 2px;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(240,192,64,0.4)); }
+    50% { filter: drop-shadow(0 0 25px rgba(240,192,64,0.8)); }
+  }
+
+  .logo-sub {
+    font-size: clamp(0.7rem, 2vw, 1rem);
+    color: var(--silver);
+    letter-spacing: 6px;
+    margin-top: 6px;
+  }
+
+  .prize-display {
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-family: 'Cinzel Decorative', serif;
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 20px 0;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .lifeline-intro {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+
+  .lifeline-badge {
+    background: rgba(0,21,96,0.8);
+    border: 1px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.75rem;
+    color: var(--silver);
+    text-align: center;
+  }
+
+  .lifeline-badge span {
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .btn-start {
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold));
+    color: var(--blue-deep);
+    border: none;
+    padding: 18px 60px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-start::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent, rgba(255,255,255,0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+
+  .btn-start:hover::before { transform: translateX(100%); }
+  .btn-start:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(240,192,64,0.6); }
+
+  /* ---- GAME SCREEN ---- */
+  #screen-game { display: none; }
+
+  .game-layout {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  @media (max-width: 680px) {
+    .game-layout { grid-template-columns: 1fr; }
+    .prize-ladder { display: none; }
+  }
+
+  .game-main {}
+
+  /* Lifelines */
+  .lifelines-bar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
+  .lifeline-btn {
+    background: radial-gradient(circle at 30% 30%, #224, var(--blue-mid));
+    border: 2px solid var(--gold-dark);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--white);
+    position: relative;
+  }
+
+  .lifeline-btn:hover:not(:disabled) {
+    border-color: var(--gold);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(240,192,64,0.5);
+  }
+
+  .lifeline-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: var(--used);
+  }
+
+  .lifeline-btn .ll-label {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.5rem;
+    white-space: nowrap;
+    color: var(--silver);
+    letter-spacing: 1px;
+  }
+
+  /* Question box */
+  .question-container {
+    background: radial-gradient(ellipse at top, #001a5e, var(--blue-deep));
+    border: 2px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-container::before, .question-container::after {
+    content: '◆';
+    position: absolute;
+    color: var(--gold);
+    font-size: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .question-container::before { left: 12px; }
+  .question-container::after { right: 12px; }
+
+  .question-number {
+    font-size: 0.65rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .question-text {
+    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--white);
+  }
+
+  /* Answers */
+  .answers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .answers-grid { grid-template-columns: 1fr; }
+  }
+
+  .answer-btn {
+    background: linear-gradient(135deg, rgba(0,21,96,0.9), rgba(0,5,40,0.95));
+    border: 2px solid var(--gold-dark);
+    border-radius: 6px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 60px;
+  }
+
+  .answer-btn:hover:not(:disabled):not(.locked) {
+    background: linear-gradient(135deg, rgba(0,51,180,0.9), rgba(0,21,96,0.95));
+    border-color: var(--gold);
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(240,192,64,0.3);
+  }
+
+  .answer-letter {
+    background: var(--gold-dark);
+    color: var(--blue-deep);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.75rem;
+  }
+
+  .answer-btn.selected { border-color: var(--gold); background: linear-gradient(135deg, #0033aa, #001166); animation: pulse-border 0.6s ease-in-out; }
+  .answer-btn.correct { border-color: var(--correct); background: linear-gradient(135deg, #003322, #001100); }
+  .answer-btn.correct .answer-letter { background: var(--correct); }
+  .answer-btn.wrong { border-color: var(--wrong); background: linear-gradient(135deg, #330000, #110000); }
+  .answer-btn.wrong .answer-letter { background: var(--wrong); }
+  .answer-btn.hidden-50 { opacity: 0.15; pointer-events: none; }
+  .answer-btn:disabled { cursor: not-allowed; }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 5px rgba(240,192,64,0.3); }
+    50% { box-shadow: 0 0 20px rgba(240,192,64,0.8); }
+  }
+
+  /* Status bar */
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    background: rgba(0,21,96,0.5);
+    border: 1px solid var(--gold-dark);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: var(--silver);
+    letter-spacing: 2px;
+  }
+
+  .current-prize {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  /* Walk away */
+  .btn-walk {
+    background: transparent;
+    border: 1px solid var(--silver);
+    color: var(--silver);
+    padding: 8px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s;
+  }
+  .btn-walk:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Prize ladder */
+  .prize-ladder {
+    background: radial-gradient(ellipse at top, #001a5e, var(--blue-deep));
+    border: 1px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 12px 0;
+    font-size: 0.65rem;
+  }
+
+  .ladder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 14px;
+    color: var(--silver);
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    border-left: 3px solid transparent;
+  }
+
+  .ladder-item.current {
+    background: rgba(240,192,64,0.1);
+    border-left-color: var(--gold);
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .ladder-item.passed { color: #445; }
+  .ladder-item.milestone { color: #aaf0aa; }
+  .ladder-item.milestone.current { color: var(--gold); }
+
+  .ladder-num { font-size: 0.55rem; opacity: 0.5; }
+
+  /* Audience poll */
+  .audience-poll {
+    background: rgba(0,10,40,0.95);
+    border: 2px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .poll-title {
+    text-align: center;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .poll-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .poll-letter {
+    width: 20px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .poll-bar-bg {
+    flex: 1;
+    height: 24px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .poll-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-bright), var(--gold));
+    border-radius: 4px;
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  /* Phone friend */
+  .phone-friend {
+    background: rgba(0,10,40,0.95);
+    border: 2px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.4s ease;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--silver);
+  }
+
+  .phone-title {
+    text-align: center;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+  }
+
+  .phone-text { font-style: italic; }
+
+  /* ---- END SCREEN ---- */
+  #screen-end {
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .end-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.4rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+  }
+
+  .end-prize {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.5rem, 10vw, 6rem);
+    background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: pulse-glow 2s ease-in-out infinite;
+    margin: 10px 0;
+  }
+
+  .end-msg {
+    color: var(--silver);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+
+  /* Confetti */
+  .confetti-piece {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    animation: confetti-fall linear forwards;
+    z-index: 999;
+    border-radius: 2px;
+  }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* Overlay for answer reveal */
+  .overlay-msg {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .overlay-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2rem, 8vw, 4rem);
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(240,192,64,0.8), 0 0 80px rgba(240,192,64,0.4);
+    animation: overlay-pop 1.5s ease forwards;
+  }
+
+  @keyframes overlay-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    30% { transform: scale(1.1); opacity: 1; }
+    70% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0; }
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="screen-start">
+  <div class="logo">
+    <div class="logo-main">Wie wordt<br>Millionair?</div>
+    <div class="logo-sub">HET KLASSIEKE QUIZSPEL</div>
+  </div>
+  <div class="prize-display">$1,000,000</div>
+  <div class="lifeline-intro">
+    <div class="lifeline-badge"><span>50:50</span>VIJFTIG-VIJFTIG</div>
+    <div class="lifeline-badge"><span>📞</span>BEL EEN VRIEND</div>
+    <div class="lifeline-badge"><span>👥</span>PUBLIEKSVRAAG</div>
+  </div>
+  <button class="btn-start" onclick="startGame()">SPEEL NU</button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="screen-game">
+  <div class="game-layout">
+    <div class="game-main">
+      <!-- Lifelines -->
+      <div class="lifelines-bar">
+        <button class="lifeline-btn" id="ll-fifty" onclick="useFiftyFifty()" title="50:50">
+          50:50
+          <span class="ll-label">VIJFTIG-VIJFTIG</span>
+        </button>
+        <button class="lifeline-btn" id="ll-phone" onclick="usePhone()" title="Bel een Vriend">
+          📞
+          <span class="ll-label">BEL VRIEND</span>
+        </button>
+        <button class="lifeline-btn" id="ll-audience" onclick="useAudience()" title="Publieksvraag">
+          👥
+          <span class="ll-label">PUBLIEK</span>
+        </button>
+      </div>
+
+      <!-- Extra info panels -->
+      <div id="panel-audience" class="audience-poll hidden"></div>
+      <div id="panel-phone" class="phone-friend hidden"></div>
+
+      <!-- Question -->
+      <div class="question-container">
+        <div class="question-number" id="question-number">QUESTION 1 OF 15</div>
+        <div class="question-text" id="question-text"></div>
+      </div>
+
+      <!-- Answers -->
+      <div class="answers-grid" id="answers-grid"></div>
+
+      <!-- Status -->
+      <div class="status-bar">
+        <div>GEGARANDEERD: <span id="guaranteed-prize" style="color:var(--gold)">€0</span></div>
+        <div class="current-prize" id="current-prize-display">€100</div>
+        <button class="btn-walk" onclick="walkAway()">STOPPEN</button>
+      </div>
+    </div>
+
+    <!-- Prize Ladder -->
+    <div class="prize-ladder" id="prize-ladder"></div>
+  </div>
+</div>
+
+<!-- END SCREEN -->
+<div id="screen-end" class="hidden">
+  <div class="logo">
+    <div class="logo-main">Wie wordt<br>Millionair?</div>
+  </div>
+  <div class="end-title" id="end-title">Congratulations!</div>
+  <div class="end-prize" id="end-prize">$0</div>
+  <div class="end-msg" id="end-msg">You walked away with nothing.</div>
+  <button class="btn-start" onclick="restartGame()">OPNIEUW SPELEN</button>
+</div>
+
+<script>
+const PRIZES = [
+  "€100", "€200", "€300", "€500", "€1.000",
+  "€2.000", "€4.000", "€8.000", "€16.000", "€32.000",
+  "€64.000", "€125.000", "€250.000", "€500.000", "€1.000.000"
+];
+const MILESTONES = [4, 9];
+const GUARANTEED = ["€0","€0","€0","€0","€1.000","€1.000","€1.000","€1.000","€1.000","€32.000","€32.000","€32.000","€32.000","€32.000","€32.000"];
+
+// Large Dutch question pool per difficulty tier
+const QUESTION_POOL = {
+  easy: [
+    { q: "Wat is de hoofdstad van Frankrijk?", a: ["Berlijn", "Madrid", "Parijs", "Rome"], correct: 2 },
+    { q: "Hoeveel zijden heeft een driehoek?", a: ["2", "3", "4", "5"], correct: 1 },
+    { q: "Welke kleur krijg je als je rood en wit mengt?", a: ["Paars", "Oranje", "Geel", "Roze"], correct: 3 },
+    { q: "Welke planeet staat het dichtst bij de zon?", a: ["Venus", "Mercurius", "Aarde", "Mars"], correct: 1 },
+    { q: "Hoeveel minuten zitten er in een uur?", a: ["30", "45", "60", "90"], correct: 2 },
+    { q: "Wat is de hoofdstad van Nederland?", a: ["Rotterdam", "Den Haag", "Utrecht", "Amsterdam"], correct: 3 },
+    { q: "Hoeveel dagen heeft een schrikkeljaar?", a: ["364", "365", "366", "367"], correct: 2 },
+    { q: "Welk dier is de koning der dieren?", a: ["Tijger", "Olifant", "Leeuw", "Neushoorn"], correct: 2 },
+    { q: "Hoeveel letters heeft het Nederlandse alfabet?", a: ["24", "25", "26", "27"], correct: 2 },
+    { q: "Wat is het grootste continent ter wereld?", a: ["Afrika", "Noord-Amerika", "Azië", "Europa"], correct: 2 },
+    { q: "Hoeveel ogen heeft een spin?", a: ["4", "6", "8", "10"], correct: 2 },
+    { q: "Welke rivier stroomt door Amsterdam?", a: ["Rijn", "Maas", "Schelde", "Amstel"], correct: 3 },
+    { q: "Hoeveel kleuren heeft een regenboog?", a: ["5", "6", "7", "8"], correct: 2 },
+    { q: "Wat is het snelste landdier?", a: ["Leeuw", "Paard", "Cheeta", "Luipaard"], correct: 2 },
+    { q: "Hoeveel weken zitten er in een jaar?", a: ["48", "50", "52", "54"], correct: 2 },
+  ],
+  medium: [
+    { q: "In welk land leven kangoeroes van nature?", a: ["Zuid-Afrika", "Brazilië", "Nieuw-Zeeland", "Australië"], correct: 3 },
+    { q: "Wat is het chemisch symbool voor goud?", a: ["Gd", "Go", "Au", "Ag"], correct: 2 },
+    { q: "In welk jaar eindigde de Tweede Wereldoorlog?", a: ["1943", "1944", "1945", "1946"], correct: 2 },
+    { q: "Wat is het grootste orgaan van het menselijk lichaam?", a: ["Hart", "Lever", "Hersenen", "Huid"], correct: 3 },
+    { q: "Hoeveel botten heeft een volwassen menselijk lichaam?", a: ["206", "212", "198", "224"], correct: 0 },
+    { q: "Welke stad is de hoofdstad van Australië?", a: ["Sydney", "Melbourne", "Canberra", "Brisbane"], correct: 2 },
+    { q: "Wat is de langste rivier ter wereld?", a: ["Amazone", "Nijl", "Yangtze", "Mississippi"], correct: 1 },
+    { q: "Hoeveel landen telt de Europese Unie (2024)?", a: ["25", "27", "28", "30"], correct: 1 },
+    { q: "In welk jaar werd de Berlijnse Muur gebouwd?", a: ["1959", "1961", "1963", "1965"], correct: 1 },
+    { q: "Welk land heeft de meeste inwoners?", a: ["India", "China", "VS", "Indonesië"], correct: 0 },
+    { q: "Hoe heet de munteenheid van Japan?", a: ["Yuan", "Won", "Yen", "Ringgit"], correct: 2 },
+    { q: "Welke planeet heeft de meeste manen?", a: ["Jupiter", "Saturnus", "Uranus", "Neptunus"], correct: 1 },
+    { q: "Wie schilderde de Nachtwacht?", a: ["Vermeer", "Van Gogh", "Rembrandt", "Rubens"], correct: 2 },
+    { q: "Uit hoeveel sterren bestaat de Amerikaanse vlag?", a: ["48", "50", "51", "52"], correct: 1 },
+    { q: "Wat is de wetenschappelijke naam voor de mens?", a: ["Homo erectus", "Homo neanderthalensis", "Homo sapiens", "Homo habilis"], correct: 2 },
+  ],
+  hard: [
+    { q: "Wat is de lichtsnelheid in vacuüm (km/s)?", a: ["299.792", "186.000", "300.000", "310.000"], correct: 0 },
+    { q: "Welk element heeft atoomnummer 79?", a: ["Zilver", "Platina", "Goud", "Koper"], correct: 2 },
+    { q: "Wie schreef de roman 'Misdaad en Straf'?", a: ["Tolstoj", "Dostojevski", "Tsjechov", "Toergenjev"], correct: 1 },
+    { q: "Wat is het kleinste land ter wereld qua oppervlakte?", a: ["Monaco", "San Marino", "Vaticaanstad", "Liechtenstein"], correct: 2 },
+    { q: "Welke wiskundige staat bekend om de onvolledigheidsstelling?", a: ["Turing", "Gödel", "Cantor", "Hilbert"], correct: 1 },
+    { q: "In welk jaar werd de eerste iPhone gepresenteerd door Steve Jobs?", a: ["2005", "2006", "2007", "2008"], correct: 2 },
+    { q: "Wat is de dichtstbijzijnde ster na de zon?", a: ["Sirius", "Proxima Centauri", "Betelgeuze", "Vega"], correct: 1 },
+    { q: "Welk land heeft de langste kustlijn ter wereld?", a: ["Rusland", "Australië", "Canada", "Noorwegen"], correct: 2 },
+    { q: "Hoeveel dimensies beschrijft de algemene relativiteitstheorie?", a: ["3", "4", "5", "11"], correct: 1 },
+    { q: "Wie componeerde de opera 'De Toverfluit'?", a: ["Beethoven", "Bach", "Mozart", "Haydn"], correct: 2 },
+    { q: "Wat is de halfwaardetijd van koolstof-14?", a: ["1.620 jaar", "3.780 jaar", "5.730 jaar", "8.200 jaar"], correct: 2 },
+    { q: "In welk jaar werd de Verenigde Naties opgericht?", a: ["1943", "1944", "1945", "1946"], correct: 2 },
+    { q: "Welke taal heeft de meeste moedertaalsprekers ter wereld?", a: ["Spaans", "Hindi", "Mandarijn", "Engels"], correct: 2 },
+    { q: "Wie ontdekte de penicilline?", a: ["Louis Pasteur", "Marie Curie", "Alexander Fleming", "Robert Koch"], correct: 2 },
+    { q: "Wat is de oppervlakte van Nederland in km²?", a: ["33.893", "37.354", "41.543", "44.017"], correct: 2 },
+  ]
+};
+
+// Shuffle helper
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Pick 5 random from each tier, shuffle answer order for each question
+function buildQuestionSet() {
+  const pick = (pool, n) => shuffle(pool).slice(0, n).map(q => {
+    // Shuffle answers, keeping track of correct one
+    const indices = shuffle([0, 1, 2, 3]);
+    const newAnswers = indices.map(i => q.a[i]);
+    const newCorrect = indices.indexOf(q.correct);
+    return { q: q.q, a: newAnswers, correct: newCorrect };
+  });
+  return [...pick(QUESTION_POOL.easy, 5), ...pick(QUESTION_POOL.medium, 5), ...pick(QUESTION_POOL.hard, 5)];
+}
+
+let ALL_QUESTIONS = [];
+
+let currentQ = 0;
+let lifelinesUsed = { fifty: false, phone: false, audience: false };
+let answered = false;
+let gameActive = false;
+let selectedBtn = null;
+
+function startGame() {
+  ALL_QUESTIONS = buildQuestionSet();
+  currentQ = 0;
+  lifelinesUsed = { fifty: false, phone: false, audience: false };
+  answered = false;
+  gameActive = true;
+
+  document.getElementById('screen-start').style.display = 'none';
+  document.getElementById('screen-game').style.display = 'block';
+  document.getElementById('screen-end').classList.add('hidden');
+
+  resetLifelineButtons();
+  buildLadder();
+  loadQuestion();
+}
+
+function resetLifelineButtons() {
+  document.getElementById('ll-fifty').disabled = false;
+  document.getElementById('ll-phone').disabled = false;
+  document.getElementById('ll-audience').disabled = false;
+}
+
+function buildLadder() {
+  const ladder = document.getElementById('prize-ladder');
+  ladder.innerHTML = '';
+  for (let i = PRIZES.length - 1; i >= 0; i--) {
+    const item = document.createElement('div');
+    item.className = 'ladder-item' + (MILESTONES.includes(i) ? ' milestone' : '') + (i === currentQ ? ' current' : '') + (i < currentQ ? ' passed' : '');
+    item.id = `ladder-${i}`;
+    item.innerHTML = `<span class="ladder-num">${i + 1}</span><span>${PRIZES[i]}</span>`;
+    ladder.appendChild(item);
+  }
+}
+
+function updateLadder() {
+  for (let i = 0; i < PRIZES.length; i++) {
+    const item = document.getElementById(`ladder-${i}`);
+    if (!item) continue;
+    item.className = 'ladder-item' + (MILESTONES.includes(i) ? ' milestone' : '') + (i === currentQ ? ' current' : '') + (i < currentQ ? ' passed' : '');
+  }
+}
+
+function loadQuestion() {
+  answered = false;
+  selectedBtn = null;
+  hidePanels();
+
+  const q = ALL_QUESTIONS[currentQ];
+  document.getElementById('question-number').textContent = `VRAAG ${currentQ + 1} VAN 15`;
+  document.getElementById('question-text').textContent = q.q;
+  document.getElementById('current-prize-display').textContent = PRIZES[currentQ];
+  document.getElementById('guaranteed-prize').textContent = currentQ > 0 ? GUARANTEED[currentQ - 1] : '€0';
+
+  updateLadder();
+
+  const grid = document.getElementById('answers-grid');
+  grid.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.a.forEach((ans, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'answer-btn';
+    btn.id = `ans-${i}`;
+    btn.innerHTML = `<span class="answer-letter">${letters[i]}</span><span>${ans}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    grid.appendChild(btn);
+  });
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+  hidePanels();
+
+  const q = ALL_QUESTIONS[currentQ];
+  const btns = document.querySelectorAll('.answer-btn');
+
+  // Highlight selected
+  btns[index].classList.add('selected');
+  selectedBtn = index;
+  btns.forEach(b => b.disabled = true);
+
+  // Delay to reveal answer
+  setTimeout(() => {
+    btns[index].classList.remove('selected');
+    if (index === q.correct) {
+      btns[index].classList.add('correct');
+      showOverlay('JUIST!');
+      setTimeout(() => {
+        if (currentQ === 14) {
+          endGame(true, PRIZES[14]);
+        } else {
+          currentQ++;
+          loadQuestion();
+        }
+      }, 2200);
+    } else {
+      btns[index].classList.add('wrong');
+      btns[q.correct].classList.add('correct');
+      showOverlay('FOUT!');
+      setTimeout(() => {
+        const guaranteed = currentQ > 0 ? GUARANTEED[currentQ - 1] : '€0';
+        endGame(false, guaranteed);
+      }, 2200);
+    }
+  }, 1200);
+}
+
+function useFiftyFifty() {
+  if (lifelinesUsed.fifty || answered) return;
+  lifelinesUsed.fifty = true;
+  document.getElementById('ll-fifty').disabled = true;
+
+  const q = ALL_QUESTIONS[currentQ];
+  const wrong = [];
+  for (let i = 0; i < 4; i++) { if (i !== q.correct) wrong.push(i); }
+  // Remove 2 random wrong answers
+  wrong.sort(() => Math.random() - 0.5);
+  wrong.slice(0, 2).forEach(i => {
+    document.getElementById(`ans-${i}`).classList.add('hidden-50');
+  });
+}
+
+function usePhone() {
+  if (lifelinesUsed.phone || answered) return;
+  lifelinesUsed.phone = true;
+  document.getElementById('ll-phone').disabled = true;
+
+  const q = ALL_QUESTIONS[currentQ];
+  const letters = ['A', 'B', 'C', 'D'];
+  const confidence = Math.random() > 0.3 ? 'vrij zeker' : 'denk ik';
+  const isRight = Math.random() > 0.2;
+  const suggestion = isRight ? q.correct : (q.correct + 1) % 4;
+  const friends = ["Alex", "Sanne", "Bas", "Laura", "Daan"];
+  const friend = friends[Math.floor(Math.random() * friends.length)];
+
+  const panel = document.getElementById('panel-phone');
+  panel.classList.remove('hidden');
+  panel.innerHTML = `
+    <div class="phone-title">📞 BEL EEN VRIEND — ${friend.toUpperCase()}</div>
+    <div class="phone-text">"Hé! Oh wow, oké... ik ben ${confidence} dat het <strong style="color:var(--gold)">${letters[suggestion]} — ${q.a[suggestion]}</strong> is. Ik herinner me iets hierover gelezen te hebben. Maar je weet hoe ik ben, ik kan het mis hebben! Veel succes!"</div>
+  `;
+}
+
+function useAudience() {
+  if (lifelinesUsed.audience || answered) return;
+  lifelinesUsed.audience = true;
+  document.getElementById('ll-audience').disabled = true;
+
+  const q = ALL_QUESTIONS[currentQ];
+  const letters = ['A', 'B', 'C', 'D'];
+
+  // Generate percentages biased toward correct answer
+  let pcts = [0, 0, 0, 0];
+  pcts[q.correct] = Math.floor(Math.random() * 25) + 50; // 50-74%
+  let rem = 100 - pcts[q.correct];
+  const others = [0, 1, 2, 3].filter(i => i !== q.correct);
+  others.forEach((i, idx) => {
+    if (idx === others.length - 1) { pcts[i] = rem; }
+    else { const v = Math.floor(Math.random() * rem * 0.6); pcts[i] = v; rem -= v; }
+  });
+
+  const panel = document.getElementById('panel-audience');
+  panel.classList.remove('hidden');
+  panel.innerHTML = `<div class="poll-title">👥 PUBLIEKSVRAAG</div>` +
+    letters.map((l, i) => `
+      <div class="poll-bar-row">
+        <span class="poll-letter">${l}</span>
+        <div class="poll-bar-bg">
+          <div class="poll-bar-fill" style="width:${pcts[i]}%">${pcts[i]}%</div>
+        </div>
+      </div>
+    `).join('');
+}
+
+function hidePanels() {
+  document.getElementById('panel-audience').classList.add('hidden');
+  document.getElementById('panel-phone').classList.add('hidden');
+}
+
+function walkAway() {
+  if (!gameActive) return;
+  const guaranteed = currentQ > 0 ? PRIZES[currentQ - 1] : '€0';
+  endGame('walk', guaranteed);
+}
+
+function showOverlay(text) {
+  const existing = document.querySelector('.overlay-msg');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = 'overlay-msg';
+  div.innerHTML = `<div class="overlay-text">${text}</div>`;
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 1600);
+}
+
+function endGame(won, prize) {
+  gameActive = false;
+  document.getElementById('screen-game').style.display = 'none';
+  document.getElementById('screen-end').classList.remove('hidden');
+
+  const title = document.getElementById('end-title');
+  const prizeEl = document.getElementById('end-prize');
+  const msg = document.getElementById('end-msg');
+
+  prizeEl.textContent = prize;
+
+  if (won === true) {
+    title.textContent = '🏆 JIJ BENT MILJONAIR! 🏆';
+    msg.textContent = 'Je hebt alle 15 vragen correct beantwoord!';
+    launchConfetti();
+  } else if (won === 'walk') {
+    title.textContent = 'Je Hebt Gestopt';
+    msg.textContent = 'Soms is voorzichtigheid de beste keuze.';
+  } else {
+    title.textContent = 'Helaas!';
+    msg.textContent = 'Dat was het verkeerde antwoord. Je gaat naar huis met je gegarandeerde prijs.';
+  }
+}
+
+function launchConfetti() {
+  const colors = ['#f0c040', '#ffffff', '#0033cc', '#ff4444', '#44ff88'];
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      el.style.animationDelay = Math.random() * 1 + 's';
+      el.style.width = (Math.random() * 10 + 6) + 'px';
+      el.style.height = (Math.random() * 10 + 6) + 'px';
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }, i * 30);
+  }
+}
+
+function restartGame() {
+  document.getElementById('screen-end').classList.add('hidden');
+  document.getElementById('screen-start').style.display = 'flex';
+  document.getElementById('screen-start').style.flexDirection = 'column';
+  document.getElementById('screen-start').style.alignItems = 'center';
+}
+</script>
+</body>
+</html>
