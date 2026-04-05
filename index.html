@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,6 @@
     overflow-x: hidden;
   }
 
-  /* Starfield */
   body::before {
     content: '';
     position: fixed;
@@ -58,7 +57,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 900px;
+    max-width: 920px;
     padding: 20px;
     animation: fadeIn 0.6s ease;
   }
@@ -68,14 +67,10 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ---- START SCREEN ---- */
-  #screen-start {
-    text-align: center;
-  }
+  /* START SCREEN */
+  #screen-start { text-align: center; }
 
-  .logo {
-    margin-bottom: 30px;
-  }
+  .logo { margin-bottom: 18px; }
 
   .logo-main {
     font-family: 'Cinzel Decorative', serif;
@@ -85,7 +80,6 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: none;
     line-height: 1.2;
     letter-spacing: 2px;
     animation: pulse-glow 3s ease-in-out infinite;
@@ -96,12 +90,7 @@
     50% { filter: drop-shadow(0 0 25px rgba(240,192,64,0.8)); }
   }
 
-  .logo-sub {
-    font-size: clamp(0.7rem, 2vw, 1rem);
-    color: var(--silver);
-    letter-spacing: 6px;
-    margin-top: 6px;
-  }
+  .logo-sub { font-size: clamp(0.7rem, 2vw, 1rem); color: var(--silver); letter-spacing: 6px; margin-top: 6px; }
 
   .prize-display {
     font-size: clamp(2rem, 8vw, 5rem);
@@ -110,33 +99,89 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin: 20px 0;
+    margin: 12px 0;
     animation: pulse-glow 2s ease-in-out infinite;
   }
 
-  .lifeline-intro {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px 0;
-    flex-wrap: wrap;
+  .difficulty-section { margin: 14px 0 10px; }
+  .difficulty-label { font-size: 0.68rem; letter-spacing: 4px; color: var(--silver); margin-bottom: 12px; }
+
+  .difficulty-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .diff-btn {
+    background: rgba(0,21,96,0.8);
+    border: 2px solid var(--gold-dark);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    color: var(--silver);
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 120px;
   }
+
+  .diff-btn:hover, .diff-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(0,40,140,0.9);
+    transform: scale(1.05);
+    box-shadow: 0 0 16px rgba(240,192,64,0.4);
+  }
+
+  .diff-btn .diff-icon { display: block; font-size: 1.4rem; margin-bottom: 4px; }
+  .diff-btn .diff-time { display: block; font-size: 0.58rem; color: var(--silver); margin-top: 4px; letter-spacing: 1px; }
+
+  .lifeline-intro { display: flex; justify-content: center; gap: 14px; margin: 14px 0; flex-wrap: wrap; }
 
   .lifeline-badge {
     background: rgba(0,21,96,0.8);
     border: 1px solid var(--gold-dark);
     border-radius: 8px;
-    padding: 10px 16px;
-    font-size: 0.75rem;
+    padding: 8px 14px;
+    font-size: 0.68rem;
     color: var(--silver);
     text-align: center;
   }
+  .lifeline-badge span { display: block; font-size: 1.3rem; margin-bottom: 3px; }
 
-  .lifeline-badge span {
-    display: block;
-    font-size: 1.4rem;
-    margin-bottom: 4px;
+  .sound-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 0.68rem;
+    color: var(--silver);
+    letter-spacing: 2px;
+    cursor: pointer;
+    user-select: none;
   }
+
+  .sound-toggle input { display: none; }
+
+  .toggle-track {
+    width: 40px; height: 20px;
+    background: rgba(0,21,96,0.8);
+    border: 1px solid var(--gold-dark);
+    border-radius: 10px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 14px; height: 14px;
+    background: var(--silver);
+    border-radius: 50%;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .sound-toggle input:checked + .toggle-track { background: rgba(0,51,160,0.9); border-color: var(--gold); }
+  .sound-toggle input:checked + .toggle-track::after { transform: translateX(20px); background: var(--gold); }
 
   .btn-start {
     background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light), var(--gold));
@@ -149,7 +194,7 @@
     letter-spacing: 3px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 14px;
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
@@ -167,7 +212,7 @@
   .btn-start:hover::before { transform: translateX(100%); }
   .btn-start:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(240,192,64,0.6); }
 
-  /* ---- GAME SCREEN ---- */
+  /* GAME SCREEN */
   #screen-game { display: none; }
 
   .game-layout {
@@ -182,62 +227,90 @@
     .prize-ladder { display: none; }
   }
 
-  .game-main {}
-
-  /* Lifelines */
   .lifelines-bar {
     display: flex;
     gap: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     justify-content: center;
+    align-items: flex-end;
   }
 
   .lifeline-btn {
     background: radial-gradient(circle at 30% 30%, #224, var(--blue-mid));
     border: 2px solid var(--gold-dark);
     border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    font-size: 1.3rem;
+    width: 56px; height: 56px;
+    font-size: 1.2rem;
     cursor: pointer;
     transition: all 0.3s;
     color: var(--white);
     position: relative;
+    flex-shrink: 0;
   }
 
-  .lifeline-btn:hover:not(:disabled) {
-    border-color: var(--gold);
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(240,192,64,0.5);
-  }
-
-  .lifeline-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    border-color: var(--used);
-  }
+  .lifeline-btn:hover:not(:disabled) { border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 15px rgba(240,192,64,0.5); }
+  .lifeline-btn:disabled { opacity: 0.3; cursor: not-allowed; border-color: var(--used); }
 
   .lifeline-btn .ll-label {
     position: absolute;
     bottom: -18px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 0.5rem;
+    font-size: 0.45rem;
     white-space: nowrap;
     color: var(--silver);
     letter-spacing: 1px;
   }
 
-  /* Question box */
+  /* TIMER */
+  .timer-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .timer-circle {
+    width: 62px; height: 62px;
+    position: relative;
+  }
+
+  .timer-circle svg { transform: rotate(-90deg); width: 62px; height: 62px; }
+  .timer-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 5; }
+  .timer-arc { fill: none; stroke: var(--gold); stroke-width: 5; stroke-linecap: round; transition: stroke 0.5s; }
+
+  .timer-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    transition: color 0.5s;
+  }
+
+  .timer-label { font-size: 0.44rem; letter-spacing: 2px; color: var(--silver); margin-top: 4px; }
+
+  .timer-urgent .timer-arc { stroke: #ff4400 !important; }
+  .timer-urgent .timer-num { color: #ff4400; animation: blink 0.5s ease-in-out infinite; }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
   .question-container {
     background: radial-gradient(ellipse at top, #001a5e, var(--blue-deep));
     border: 2px solid var(--gold-dark);
     border-radius: 8px;
-    padding: 28px;
+    padding: 26px 36px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     position: relative;
-    min-height: 120px;
+    min-height: 108px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -255,49 +328,36 @@
   .question-container::before { left: 12px; }
   .question-container::after { right: 12px; }
 
-  .question-number {
-    font-size: 0.65rem;
-    color: var(--gold);
-    letter-spacing: 3px;
-    margin-bottom: 12px;
-  }
+  .question-number { font-size: 0.62rem; color: var(--gold); letter-spacing: 3px; margin-bottom: 10px; }
+  .question-text { font-size: clamp(0.86rem, 2.3vw, 1.08rem); line-height: 1.65; }
 
-  .question-text {
-    font-size: clamp(0.9rem, 2.5vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--white);
-  }
-
-  /* Answers */
   .answers-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
 
-  @media (max-width: 500px) {
-    .answers-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 500px) { .answers-grid { grid-template-columns: 1fr; } }
 
   .answer-btn {
     background: linear-gradient(135deg, rgba(0,21,96,0.9), rgba(0,5,40,0.95));
     border: 2px solid var(--gold-dark);
     border-radius: 6px;
-    padding: 14px 16px;
+    padding: 13px 15px;
     color: var(--white);
     font-family: 'Cinzel', serif;
-    font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    font-size: clamp(0.66rem, 1.65vw, 0.86rem);
     cursor: pointer;
     transition: all 0.25s;
     text-align: left;
     display: flex;
     align-items: center;
     gap: 10px;
-    min-height: 60px;
+    min-height: 56px;
   }
 
-  .answer-btn:hover:not(:disabled):not(.locked) {
+  .answer-btn:hover:not(:disabled):not(.hidden-50) {
     background: linear-gradient(135deg, rgba(0,51,180,0.9), rgba(0,21,96,0.95));
     border-color: var(--gold);
     transform: scale(1.02);
@@ -308,30 +368,24 @@
     background: var(--gold-dark);
     color: var(--blue-deep);
     border-radius: 50%;
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 0.75rem;
+    width: 26px; height: 26px; min-width: 26px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.74rem;
   }
 
-  .answer-btn.selected { border-color: var(--gold); background: linear-gradient(135deg, #0033aa, #001166); animation: pulse-border 0.6s ease-in-out; }
+  .answer-btn.selected { border-color: var(--gold); background: linear-gradient(135deg, #0033aa, #001166); animation: pulse-border 0.6s ease-in-out infinite; }
   .answer-btn.correct { border-color: var(--correct); background: linear-gradient(135deg, #003322, #001100); }
-  .answer-btn.correct .answer-letter { background: var(--correct); }
+  .answer-btn.correct .answer-letter { background: var(--correct); color: #fff; }
   .answer-btn.wrong { border-color: var(--wrong); background: linear-gradient(135deg, #330000, #110000); }
-  .answer-btn.wrong .answer-letter { background: var(--wrong); }
-  .answer-btn.hidden-50 { opacity: 0.15; pointer-events: none; }
+  .answer-btn.wrong .answer-letter { background: var(--wrong); color: #fff; }
+  .answer-btn.hidden-50 { opacity: 0.1; pointer-events: none; }
   .answer-btn:disabled { cursor: not-allowed; }
 
   @keyframes pulse-border {
     0%, 100% { box-shadow: 0 0 5px rgba(240,192,64,0.3); }
-    50% { box-shadow: 0 0 20px rgba(240,192,64,0.8); }
+    50% { box-shadow: 0 0 22px rgba(240,192,64,0.9); }
   }
 
-  /* Status bar */
   .status-bar {
     display: flex;
     justify-content: space-between;
@@ -340,25 +394,20 @@
     background: rgba(0,21,96,0.5);
     border: 1px solid var(--gold-dark);
     border-radius: 6px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--silver);
     letter-spacing: 2px;
   }
 
-  .current-prize {
-    color: var(--gold);
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
+  .current-prize { color: var(--gold); font-weight: 700; font-size: 0.88rem; }
 
-  /* Walk away */
   .btn-walk {
     background: transparent;
     border: 1px solid var(--silver);
     color: var(--silver);
-    padding: 8px 20px;
+    padding: 8px 16px;
     font-family: 'Cinzel', serif;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 2px;
     cursor: pointer;
     border-radius: 4px;
@@ -366,127 +415,74 @@
   }
   .btn-walk:hover { border-color: var(--gold); color: var(--gold); }
 
-  /* Prize ladder */
   .prize-ladder {
     background: radial-gradient(ellipse at top, #001a5e, var(--blue-deep));
     border: 1px solid var(--gold-dark);
     border-radius: 8px;
-    padding: 12px 0;
-    font-size: 0.65rem;
+    padding: 10px 0;
+    font-size: 0.6rem;
   }
 
   .ladder-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 14px;
+    padding: 4px 12px;
     color: var(--silver);
     letter-spacing: 1px;
-    transition: all 0.3s;
     border-left: 3px solid transparent;
+    transition: all 0.3s;
   }
 
-  .ladder-item.current {
-    background: rgba(240,192,64,0.1);
-    border-left-color: var(--gold);
-    color: var(--gold);
-    font-weight: 700;
-  }
-
+  .ladder-item.current { background: rgba(240,192,64,0.1); border-left-color: var(--gold); color: var(--gold); font-weight: 700; }
   .ladder-item.passed { color: #445; }
   .ladder-item.milestone { color: #aaf0aa; }
   .ladder-item.milestone.current { color: var(--gold); }
+  .ladder-num { font-size: 0.5rem; opacity: 0.5; }
 
-  .ladder-num { font-size: 0.55rem; opacity: 0.5; }
-
-  /* Audience poll */
   .audience-poll {
     background: rgba(0,10,40,0.95);
     border: 2px solid var(--gold-dark);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
     animation: fadeIn 0.4s ease;
   }
 
-  .poll-title {
-    text-align: center;
-    color: var(--gold);
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-  }
-
-  .poll-bar-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .poll-letter {
-    width: 20px;
-    font-size: 0.75rem;
-    color: var(--gold);
-    font-weight: 700;
-  }
-
-  .poll-bar-bg {
-    flex: 1;
-    height: 24px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
+  .poll-title { text-align: center; color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 12px; }
+  .poll-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .poll-letter { width: 18px; font-size: 0.7rem; color: var(--gold); font-weight: 700; }
+  .poll-bar-bg { flex: 1; height: 22px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
   .poll-bar-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--blue-bright), var(--gold));
     border-radius: 4px;
-    transition: width 1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    width: 0%;
+    transition: width 1.2s ease;
+    display: flex; align-items: center; justify-content: flex-end;
     padding-right: 6px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--white);
+    font-size: 0.6rem; font-weight: 700; color: var(--white);
+    min-width: 28px;
   }
 
-  /* Phone friend */
   .phone-friend {
     background: rgba(0,10,40,0.95);
     border: 2px solid var(--gold-dark);
     border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
     animation: fadeIn 0.4s ease;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.8;
     color: var(--silver);
   }
-
-  .phone-title {
-    text-align: center;
-    color: var(--gold);
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    margin-bottom: 12px;
-  }
-
+  .phone-title { text-align: center; color: var(--gold); font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 10px; }
   .phone-text { font-style: italic; }
 
-  /* ---- END SCREEN ---- */
-  #screen-end {
-    text-align: center;
-    animation: fadeIn 0.8s ease;
-  }
+  /* END SCREEN */
+  #screen-end { text-align: center; }
 
-  .end-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.4rem, 4vw, 2.5rem);
-    margin-bottom: 10px;
-  }
+  .end-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.3rem, 4vw, 2.4rem); margin-bottom: 8px; }
 
   .end-prize {
     font-family: 'Cinzel Decorative', serif;
@@ -496,21 +492,13 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     animation: pulse-glow 2s ease-in-out infinite;
-    margin: 10px 0;
+    margin: 8px 0;
   }
 
-  .end-msg {
-    color: var(--silver);
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-  }
+  .end-msg { color: var(--silver); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 26px; line-height: 1.8; }
 
-  /* Confetti */
   .confetti-piece {
     position: fixed;
-    width: 10px;
-    height: 10px;
     top: -20px;
     animation: confetti-fall linear forwards;
     z-index: 999;
@@ -519,10 +507,9 @@
 
   @keyframes confetti-fall {
     0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
 
-  /* Overlay for answer reveal */
   .overlay-msg {
     position: fixed;
     inset: 0;
@@ -538,7 +525,7 @@
     font-size: clamp(2rem, 8vw, 4rem);
     color: var(--gold);
     text-shadow: 0 0 40px rgba(240,192,64,0.8), 0 0 80px rgba(240,192,64,0.4);
-    animation: overlay-pop 1.5s ease forwards;
+    animation: overlay-pop 1.6s ease forwards;
   }
 
   @keyframes overlay-pop {
@@ -559,12 +546,41 @@
     <div class="logo-main">Wie wordt<br>Millionair?</div>
     <div class="logo-sub">HET KLASSIEKE QUIZSPEL</div>
   </div>
-  <div class="prize-display">$1,000,000</div>
+  <div class="prize-display">€1.000.000</div>
+
+  <div class="difficulty-section">
+    <div class="difficulty-label">KIES JE MOEILIJKHEIDSGRAAD</div>
+    <div class="difficulty-buttons">
+      <button class="diff-btn" data-diff="easy" onclick="setDifficulty('easy')">
+        <span class="diff-icon">🌟</span>
+        MAKKELIJK
+        <span class="diff-time">60 sec / vraag</span>
+      </button>
+      <button class="diff-btn active" data-diff="normal" onclick="setDifficulty('normal')">
+        <span class="diff-icon">⚡</span>
+        NORMAAL
+        <span class="diff-time">45 sec / vraag</span>
+      </button>
+      <button class="diff-btn" data-diff="hard" onclick="setDifficulty('hard')">
+        <span class="diff-icon">🔥</span>
+        MOEILIJK
+        <span class="diff-time">30 sec / vraag</span>
+      </button>
+    </div>
+  </div>
+
   <div class="lifeline-intro">
     <div class="lifeline-badge"><span>50:50</span>VIJFTIG-VIJFTIG</div>
     <div class="lifeline-badge"><span>📞</span>BEL EEN VRIEND</div>
     <div class="lifeline-badge"><span>👥</span>PUBLIEKSVRAAG</div>
   </div>
+
+  <label class="sound-toggle">
+    <input type="checkbox" id="sound-check" checked>
+    <span class="toggle-track"></span>
+    GELUID AAN
+  </label>
+
   <button class="btn-start" onclick="startGame()">SPEEL NU</button>
 </div>
 
@@ -572,36 +588,39 @@
 <div id="screen-game">
   <div class="game-layout">
     <div class="game-main">
-      <!-- Lifelines -->
       <div class="lifelines-bar">
         <button class="lifeline-btn" id="ll-fifty" onclick="useFiftyFifty()" title="50:50">
-          50:50
-          <span class="ll-label">VIJFTIG-VIJFTIG</span>
+          50:50<span class="ll-label">VIJFTIG-VIJFTIG</span>
         </button>
         <button class="lifeline-btn" id="ll-phone" onclick="usePhone()" title="Bel een Vriend">
-          📞
-          <span class="ll-label">BEL VRIEND</span>
+          📞<span class="ll-label">BEL VRIEND</span>
         </button>
         <button class="lifeline-btn" id="ll-audience" onclick="useAudience()" title="Publieksvraag">
-          👥
-          <span class="ll-label">PUBLIEK</span>
+          👥<span class="ll-label">PUBLIEK</span>
         </button>
+        <div class="timer-wrap">
+          <div class="timer-circle" id="timer-circle">
+            <svg viewBox="0 0 62 62">
+              <circle class="timer-bg" cx="31" cy="31" r="27"/>
+              <circle class="timer-arc" id="timer-arc" cx="31" cy="31" r="27"
+                stroke-dasharray="169.6" stroke-dashoffset="0"/>
+            </svg>
+            <div class="timer-num" id="timer-num">45</div>
+          </div>
+          <div class="timer-label">SECONDEN</div>
+        </div>
       </div>
 
-      <!-- Extra info panels -->
       <div id="panel-audience" class="audience-poll hidden"></div>
       <div id="panel-phone" class="phone-friend hidden"></div>
 
-      <!-- Question -->
       <div class="question-container">
-        <div class="question-number" id="question-number">QUESTION 1 OF 15</div>
+        <div class="question-number" id="question-number">VRAAG 1 VAN 15</div>
         <div class="question-text" id="question-text"></div>
       </div>
 
-      <!-- Answers -->
       <div class="answers-grid" id="answers-grid"></div>
 
-      <!-- Status -->
       <div class="status-bar">
         <div>GEGARANDEERD: <span id="guaranteed-prize" style="color:var(--gold)">€0</span></div>
         <div class="current-prize" id="current-prize-display">€100</div>
@@ -609,7 +628,6 @@
       </div>
     </div>
 
-    <!-- Prize Ladder -->
     <div class="prize-ladder" id="prize-ladder"></div>
   </div>
 </div>
@@ -619,278 +637,363 @@
   <div class="logo">
     <div class="logo-main">Wie wordt<br>Millionair?</div>
   </div>
-  <div class="end-title" id="end-title">Congratulations!</div>
-  <div class="end-prize" id="end-prize">$0</div>
-  <div class="end-msg" id="end-msg">You walked away with nothing.</div>
+  <div class="end-title" id="end-title"></div>
+  <div class="end-prize" id="end-prize"></div>
+  <div class="end-msg" id="end-msg"></div>
   <button class="btn-start" onclick="restartGame()">OPNIEUW SPELEN</button>
 </div>
 
 <script>
-const PRIZES = [
-  "€100", "€200", "€300", "€500", "€1.000",
-  "€2.000", "€4.000", "€8.000", "€16.000", "€32.000",
-  "€64.000", "€125.000", "€250.000", "€500.000", "€1.000.000"
-];
+// ── PRIZES ─────────────────────────────────────────────
+const PRIZES = ["€100","€200","€300","€500","€1.000","€2.000","€4.000","€8.000","€16.000","€32.000","€64.000","€125.000","€250.000","€500.000","€1.000.000"];
 const MILESTONES = [4, 9];
 const GUARANTEED = ["€0","€0","€0","€0","€1.000","€1.000","€1.000","€1.000","€1.000","€32.000","€32.000","€32.000","€32.000","€32.000","€32.000"];
+const DIFFICULTY_TIMES = { easy: 60, normal: 45, hard: 30 };
 
-// Large Dutch question pool per difficulty tier
+// ── QUESTION BANK (25 per tier) ──────────────────────────
 const QUESTION_POOL = {
   easy: [
-    { q: "Wat is de hoofdstad van Frankrijk?", a: ["Berlijn", "Madrid", "Parijs", "Rome"], correct: 2 },
-    { q: "Hoeveel zijden heeft een driehoek?", a: ["2", "3", "4", "5"], correct: 1 },
-    { q: "Welke kleur krijg je als je rood en wit mengt?", a: ["Paars", "Oranje", "Geel", "Roze"], correct: 3 },
-    { q: "Welke planeet staat het dichtst bij de zon?", a: ["Venus", "Mercurius", "Aarde", "Mars"], correct: 1 },
-    { q: "Hoeveel minuten zitten er in een uur?", a: ["30", "45", "60", "90"], correct: 2 },
-    { q: "Wat is de hoofdstad van Nederland?", a: ["Rotterdam", "Den Haag", "Utrecht", "Amsterdam"], correct: 3 },
-    { q: "Hoeveel dagen heeft een schrikkeljaar?", a: ["364", "365", "366", "367"], correct: 2 },
-    { q: "Welk dier is de koning der dieren?", a: ["Tijger", "Olifant", "Leeuw", "Neushoorn"], correct: 2 },
-    { q: "Hoeveel letters heeft het Nederlandse alfabet?", a: ["24", "25", "26", "27"], correct: 2 },
-    { q: "Wat is het grootste continent ter wereld?", a: ["Afrika", "Noord-Amerika", "Azië", "Europa"], correct: 2 },
-    { q: "Hoeveel ogen heeft een spin?", a: ["4", "6", "8", "10"], correct: 2 },
-    { q: "Welke rivier stroomt door Amsterdam?", a: ["Rijn", "Maas", "Schelde", "Amstel"], correct: 3 },
-    { q: "Hoeveel kleuren heeft een regenboog?", a: ["5", "6", "7", "8"], correct: 2 },
-    { q: "Wat is het snelste landdier?", a: ["Leeuw", "Paard", "Cheeta", "Luipaard"], correct: 2 },
-    { q: "Hoeveel weken zitten er in een jaar?", a: ["48", "50", "52", "54"], correct: 2 },
+    { q:"Wat is de hoofdstad van Frankrijk?", a:["Berlijn","Madrid","Parijs","Rome"], correct:2 },
+    { q:"Hoeveel zijden heeft een driehoek?", a:["2","3","4","5"], correct:1 },
+    { q:"Welke kleur krijg je als je rood en wit mengt?", a:["Paars","Oranje","Geel","Roze"], correct:3 },
+    { q:"Welke planeet staat het dichtst bij de zon?", a:["Venus","Mercurius","Aarde","Mars"], correct:1 },
+    { q:"Hoeveel minuten zitten er in een uur?", a:["30","45","60","90"], correct:2 },
+    { q:"Wat is de hoofdstad van Nederland?", a:["Rotterdam","Den Haag","Utrecht","Amsterdam"], correct:3 },
+    { q:"Hoeveel dagen heeft een schrikkeljaar?", a:["364","365","366","367"], correct:2 },
+    { q:"Welk dier staat bekend als de 'koning der dieren'?", a:["Tijger","Olifant","Leeuw","Neushoorn"], correct:2 },
+    { q:"Hoeveel letters heeft het Nederlandse alfabet?", a:["24","25","26","27"], correct:2 },
+    { q:"Wat is het grootste continent ter wereld?", a:["Afrika","Noord-Amerika","Azië","Europa"], correct:2 },
+    { q:"Hoeveel ogen heeft een spin?", a:["4","6","8","10"], correct:2 },
+    { q:"Welke rivier stroomt door Amsterdam?", a:["Rijn","Maas","Schelde","Amstel"], correct:3 },
+    { q:"Hoeveel kleuren heeft een regenboog?", a:["5","6","7","8"], correct:2 },
+    { q:"Wat is het snelste landdier?", a:["Leeuw","Paard","Cheeta","Luipaard"], correct:2 },
+    { q:"Hoeveel weken zitten er in een jaar?", a:["48","50","52","54"], correct:2 },
+    { q:"Wat is de hoofdstad van Duitsland?", a:["München","Hamburg","Berlijn","Frankfurt"], correct:2 },
+    { q:"Hoeveel uur heeft een dag?", a:["12","20","24","48"], correct:2 },
+    { q:"Welk land heeft de Eiffeltoren?", a:["Italië","Spanje","België","Frankrijk"], correct:3 },
+    { q:"Van welk dier krijg je wol?", a:["Koe","Schaap","Geit","Varken"], correct:1 },
+    { q:"Hoeveel centimeter is één meter?", a:["10","100","1000","10000"], correct:1 },
+    { q:"Welk orgaan pompt bloed door het lichaam?", a:["Long","Nier","Hart","Lever"], correct:2 },
+    { q:"Welke taal spreken mensen in Brazilië?", a:["Spaans","Portugees","Engels","Frans"], correct:1 },
+    { q:"Hoeveel poten heeft een insect?", a:["4","6","8","10"], correct:1 },
+    { q:"Wat is de hoofdstad van Italië?", a:["Milaan","Venetië","Florence","Rome"], correct:3 },
+    { q:"Hoe heet de grootste oceaan?", a:["Atlantische Oceaan","Indische Oceaan","Stille Oceaan","Noordelijke IJszee"], correct:2 },
   ],
   medium: [
-    { q: "In welk land leven kangoeroes van nature?", a: ["Zuid-Afrika", "Brazilië", "Nieuw-Zeeland", "Australië"], correct: 3 },
-    { q: "Wat is het chemisch symbool voor goud?", a: ["Gd", "Go", "Au", "Ag"], correct: 2 },
-    { q: "In welk jaar eindigde de Tweede Wereldoorlog?", a: ["1943", "1944", "1945", "1946"], correct: 2 },
-    { q: "Wat is het grootste orgaan van het menselijk lichaam?", a: ["Hart", "Lever", "Hersenen", "Huid"], correct: 3 },
-    { q: "Hoeveel botten heeft een volwassen menselijk lichaam?", a: ["206", "212", "198", "224"], correct: 0 },
-    { q: "Welke stad is de hoofdstad van Australië?", a: ["Sydney", "Melbourne", "Canberra", "Brisbane"], correct: 2 },
-    { q: "Wat is de langste rivier ter wereld?", a: ["Amazone", "Nijl", "Yangtze", "Mississippi"], correct: 1 },
-    { q: "Hoeveel landen telt de Europese Unie (2024)?", a: ["25", "27", "28", "30"], correct: 1 },
-    { q: "In welk jaar werd de Berlijnse Muur gebouwd?", a: ["1959", "1961", "1963", "1965"], correct: 1 },
-    { q: "Welk land heeft de meeste inwoners?", a: ["India", "China", "VS", "Indonesië"], correct: 0 },
-    { q: "Hoe heet de munteenheid van Japan?", a: ["Yuan", "Won", "Yen", "Ringgit"], correct: 2 },
-    { q: "Welke planeet heeft de meeste manen?", a: ["Jupiter", "Saturnus", "Uranus", "Neptunus"], correct: 1 },
-    { q: "Wie schilderde de Nachtwacht?", a: ["Vermeer", "Van Gogh", "Rembrandt", "Rubens"], correct: 2 },
-    { q: "Uit hoeveel sterren bestaat de Amerikaanse vlag?", a: ["48", "50", "51", "52"], correct: 1 },
-    { q: "Wat is de wetenschappelijke naam voor de mens?", a: ["Homo erectus", "Homo neanderthalensis", "Homo sapiens", "Homo habilis"], correct: 2 },
+    { q:"In welk land leven kangoeroes van nature?", a:["Zuid-Afrika","Brazilië","Nieuw-Zeeland","Australië"], correct:3 },
+    { q:"Wat is het chemisch symbool voor goud?", a:["Gd","Go","Au","Ag"], correct:2 },
+    { q:"In welk jaar eindigde de Tweede Wereldoorlog?", a:["1943","1944","1945","1946"], correct:2 },
+    { q:"Wat is het grootste orgaan van het menselijk lichaam?", a:["Hart","Lever","Hersenen","Huid"], correct:3 },
+    { q:"Hoeveel botten heeft een volwassen menselijk lichaam?", a:["206","212","198","224"], correct:0 },
+    { q:"Welke stad is de hoofdstad van Australië?", a:["Sydney","Melbourne","Canberra","Brisbane"], correct:2 },
+    { q:"Wat is de langste rivier ter wereld?", a:["Amazone","Nijl","Yangtze","Mississippi"], correct:1 },
+    { q:"Hoeveel landen telt de Europese Unie (2024)?", a:["25","27","28","30"], correct:1 },
+    { q:"In welk jaar werd de Berlijnse Muur gebouwd?", a:["1959","1961","1963","1965"], correct:1 },
+    { q:"Welk land heeft de meeste inwoners?", a:["India","China","VS","Indonesië"], correct:0 },
+    { q:"Hoe heet de munteenheid van Japan?", a:["Yuan","Won","Yen","Ringgit"], correct:2 },
+    { q:"Welke planeet heeft de meeste manen?", a:["Jupiter","Saturnus","Uranus","Neptunus"], correct:1 },
+    { q:"Wie schilderde de Nachtwacht?", a:["Vermeer","Van Gogh","Rembrandt","Rubens"], correct:2 },
+    { q:"Uit hoeveel sterren bestaat de Amerikaanse vlag?", a:["48","50","51","52"], correct:1 },
+    { q:"Wat is de wetenschappelijke naam voor de mens?", a:["Homo erectus","Homo neanderthalensis","Homo sapiens","Homo habilis"], correct:2 },
+    { q:"In welk jaar vond de eerste maanlanding plaats?", a:["1965","1967","1969","1971"], correct:2 },
+    { q:"Welk land heeft de grootste oppervlakte ter wereld?", a:["Canada","China","VS","Rusland"], correct:3 },
+    { q:"Hoeveel kamers heeft een menselijk hart?", a:["2","3","4","5"], correct:2 },
+    { q:"Welke taal heeft de meeste moedertaalsprekers ter wereld?", a:["Spaans","Hindi","Mandarijn","Engels"], correct:2 },
+    { q:"Wie schreef 'De Ontdekking van de Hemel'?", a:["Harry Mulisch","Multatuli","Simon Vestdijk","Gerard Reve"], correct:0 },
+    { q:"In welk land staat de Sagrada Família?", a:["Portugal","Italië","Spanje","Mexico"], correct:2 },
+    { q:"Wat is de snelheid van geluid in lucht (m/s)?", a:["200","343","500","700"], correct:1 },
+    { q:"Welk element is het meest voorkomend in de aardkorst?", a:["Stikstof","IJzer","Zuurstof","Silicium"], correct:2 },
+    { q:"Hoeveel wereldwonderen telt de klassieke lijst?", a:["5","6","7","8"], correct:2 },
+    { q:"Welk land was de eerste om vrouwen kiesrecht te geven (1893)?", a:["Zweden","Finland","Australië","Nieuw-Zeeland"], correct:3 },
   ],
   hard: [
-    { q: "Wat is de lichtsnelheid in vacuüm (km/s)?", a: ["299.792", "186.000", "300.000", "310.000"], correct: 0 },
-    { q: "Welk element heeft atoomnummer 79?", a: ["Zilver", "Platina", "Goud", "Koper"], correct: 2 },
-    { q: "Wie schreef de roman 'Misdaad en Straf'?", a: ["Tolstoj", "Dostojevski", "Tsjechov", "Toergenjev"], correct: 1 },
-    { q: "Wat is het kleinste land ter wereld qua oppervlakte?", a: ["Monaco", "San Marino", "Vaticaanstad", "Liechtenstein"], correct: 2 },
-    { q: "Welke wiskundige staat bekend om de onvolledigheidsstelling?", a: ["Turing", "Gödel", "Cantor", "Hilbert"], correct: 1 },
-    { q: "In welk jaar werd de eerste iPhone gepresenteerd door Steve Jobs?", a: ["2005", "2006", "2007", "2008"], correct: 2 },
-    { q: "Wat is de dichtstbijzijnde ster na de zon?", a: ["Sirius", "Proxima Centauri", "Betelgeuze", "Vega"], correct: 1 },
-    { q: "Welk land heeft de langste kustlijn ter wereld?", a: ["Rusland", "Australië", "Canada", "Noorwegen"], correct: 2 },
-    { q: "Hoeveel dimensies beschrijft de algemene relativiteitstheorie?", a: ["3", "4", "5", "11"], correct: 1 },
-    { q: "Wie componeerde de opera 'De Toverfluit'?", a: ["Beethoven", "Bach", "Mozart", "Haydn"], correct: 2 },
-    { q: "Wat is de halfwaardetijd van koolstof-14?", a: ["1.620 jaar", "3.780 jaar", "5.730 jaar", "8.200 jaar"], correct: 2 },
-    { q: "In welk jaar werd de Verenigde Naties opgericht?", a: ["1943", "1944", "1945", "1946"], correct: 2 },
-    { q: "Welke taal heeft de meeste moedertaalsprekers ter wereld?", a: ["Spaans", "Hindi", "Mandarijn", "Engels"], correct: 2 },
-    { q: "Wie ontdekte de penicilline?", a: ["Louis Pasteur", "Marie Curie", "Alexander Fleming", "Robert Koch"], correct: 2 },
-    { q: "Wat is de oppervlakte van Nederland in km²?", a: ["33.893", "37.354", "41.543", "44.017"], correct: 2 },
+    { q:"Wat is de lichtsnelheid in vacuüm (km/s)?", a:["299.792","186.000","300.000","310.000"], correct:0 },
+    { q:"Welk element heeft atoomnummer 79?", a:["Zilver","Platina","Goud","Koper"], correct:2 },
+    { q:"Wie schreef de roman 'Misdaad en Straf'?", a:["Tolstoj","Dostojevski","Tsjechov","Toergenjev"], correct:1 },
+    { q:"Wat is het kleinste land ter wereld qua oppervlakte?", a:["Monaco","San Marino","Vaticaanstad","Liechtenstein"], correct:2 },
+    { q:"Welke wiskundige staat bekend om de onvolledigheidsstelling?", a:["Turing","Gödel","Cantor","Hilbert"], correct:1 },
+    { q:"In welk jaar werd de eerste iPhone gepresenteerd door Steve Jobs?", a:["2005","2006","2007","2008"], correct:2 },
+    { q:"Wat is de dichtstbijzijnde ster na de zon?", a:["Sirius","Proxima Centauri","Betelgeuze","Vega"], correct:1 },
+    { q:"Welk land heeft de langste kustlijn ter wereld?", a:["Rusland","Australië","Canada","Noorwegen"], correct:2 },
+    { q:"Hoeveel dimensies beschrijft de algemene relativiteitstheorie?", a:["3","4","5","11"], correct:1 },
+    { q:"Wie componeerde de opera 'De Toverfluit'?", a:["Beethoven","Bach","Mozart","Haydn"], correct:2 },
+    { q:"Wat is de halfwaardetijd van koolstof-14 (in jaren)?", a:["1.620","3.780","5.730","8.200"], correct:2 },
+    { q:"In welk jaar werd de Verenigde Naties opgericht?", a:["1943","1944","1945","1946"], correct:2 },
+    { q:"Wie ontdekte de penicilline?", a:["Louis Pasteur","Marie Curie","Alexander Fleming","Robert Koch"], correct:2 },
+    { q:"Welk getal is de basis van het natuurlijke logaritme (e)?", a:["2,303","2,718","3,141","1,618"], correct:1 },
+    { q:"In welk jaar begon de Franse Revolutie?", a:["1776","1783","1789","1792"], correct:2 },
+    { q:"Welk protein draagt zuurstof in het bloed?", a:["Insuline","Hemoglobine","Amylase","Fibrine"], correct:1 },
+    { q:"Hoeveel manen heeft Mars?", a:["0","1","2","3"], correct:2 },
+    { q:"Welke schilder sneed zijn eigen oor af?", a:["Picasso","Dalí","Monet","Van Gogh"], correct:3 },
+    { q:"Hoeveel botten heeft een pasgeboren baby?", a:["206","270","300","350"], correct:1 },
+    { q:"Welk element heeft het symbool 'W' in het periodiek systeem?", a:["Wolfram","Waterstof","Wismut","Wolfraam"], correct:0 },
+    { q:"In welk jaar viel de Berlijnse Muur?", a:["1987","1988","1989","1990"], correct:2 },
+    { q:"Wat is de oppervlakte van Nederland in km²?", a:["33.893","37.354","41.543","44.017"], correct:2 },
+    { q:"Welke aandoening beschreef Alzheimer voor het eerst in 1906?", a:["Parkinson","Dementie","Schizofrenie","Epilepsie"], correct:1 },
+    { q:"Wat is de naam van het zwaarste bekende element dat stabiel is?", a:["Lood","Bismut","Radium","Uranium"], correct:1 },
+    { q:"Wie schreef 'Het Kapitaal' (Das Kapital)?", a:["Engels","Lenin","Marx","Trotski"], correct:2 },
   ]
 };
 
-// Shuffle helper
+// ── AUDIO (Web Audio API) ────────────────────────────────
+let audioCtx = null;
+
+function getAudioCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function isSoundOn() { return document.getElementById('sound-check').checked; }
+
+function playTone(freq, dur, type='sine', vol=0.28, delay=0) {
+  if (!isSoundOn()) return;
+  try {
+    const ctx = getAudioCtx();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.type = type;
+    o.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+    g.gain.setValueAtTime(0, ctx.currentTime + delay);
+    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + delay + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + dur);
+    o.start(ctx.currentTime + delay);
+    o.stop(ctx.currentTime + delay + dur + 0.05);
+  } catch(e) {}
+}
+
+const SFX = {
+  select:      () => playTone(660, 0.08, 'sine', 0.2),
+  correct:     () => { playTone(523,.12,'sine',.28); playTone(659,.12,'sine',.28,.14); playTone(784,.25,'sine',.3,.28); playTone(1047,.45,'sine',.35,.54); },
+  wrong:       () => { playTone(300,.18,'sawtooth',.28); playTone(220,.25,'sawtooth',.3,.2); playTone(150,.45,'sawtooth',.25,.46); },
+  milestone:   () => [523,659,784,1047,1319].forEach((f,i)=>playTone(f,.22,'sine',.28,i*.1)),
+  millionaire: () => { [523,659,784,1047,1319,1568,2093].forEach((f,i)=>playTone(f,.28,'sine',.3,i*.14)); setTimeout(()=>{ [523,659,784,1047].forEach((f,i)=>playTone(f,1.4,'sine',.32,i*.04)); },1200); },
+  walk:        () => { playTone(440,.18,'sine',.24); playTone(370,.2,'sine',.2,.2); playTone(330,.4,'sine',.15,.42); },
+  tick:        (s) => { if(s<=10) playTone(880,.05,'square',.12); }
+};
+
+// ── HELPERS ──────────────────────────────────────────────
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
   return a;
 }
 
-// Pick 5 random from each tier, shuffle answer order for each question
 function buildQuestionSet() {
-  const pick = (pool, n) => shuffle(pool).slice(0, n).map(q => {
-    // Shuffle answers, keeping track of correct one
-    const indices = shuffle([0, 1, 2, 3]);
-    const newAnswers = indices.map(i => q.a[i]);
-    const newCorrect = indices.indexOf(q.correct);
-    return { q: q.q, a: newAnswers, correct: newCorrect };
+  const pick=(pool,n)=>shuffle(pool).slice(0,n).map(q=>{
+    const idx=shuffle([0,1,2,3]);
+    return { q:q.q, a:idx.map(i=>q.a[i]), correct:idx.indexOf(q.correct) };
   });
-  return [...pick(QUESTION_POOL.easy, 5), ...pick(QUESTION_POOL.medium, 5), ...pick(QUESTION_POOL.hard, 5)];
+  return [...pick(QUESTION_POOL.easy,5), ...pick(QUESTION_POOL.medium,5), ...pick(QUESTION_POOL.hard,5)];
 }
 
-let ALL_QUESTIONS = [];
+// ── STATE ────────────────────────────────────────────────
+let ALL_QUESTIONS=[], currentQ=0;
+let lifelinesUsed={fifty:false,phone:false,audience:false};
+let answered=false, gameActive=false;
+let timerInterval=null, timeLeft=45, timePerQuestion=45;
+let selectedDifficulty='normal';
 
-let currentQ = 0;
-let lifelinesUsed = { fifty: false, phone: false, audience: false };
-let answered = false;
-let gameActive = false;
-let selectedBtn = null;
+// ── DIFFICULTY ───────────────────────────────────────────
+function setDifficulty(diff) {
+  selectedDifficulty = diff;
+  document.querySelectorAll('.diff-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(`[data-diff="${diff}"]`).classList.add('active');
+  SFX.select();
+}
 
+// ── GAME START ───────────────────────────────────────────
 function startGame() {
   ALL_QUESTIONS = buildQuestionSet();
   currentQ = 0;
-  lifelinesUsed = { fifty: false, phone: false, audience: false };
+  lifelinesUsed = {fifty:false,phone:false,audience:false};
   answered = false;
   gameActive = true;
+  timePerQuestion = DIFFICULTY_TIMES[selectedDifficulty];
 
-  document.getElementById('screen-start').style.display = 'none';
-  document.getElementById('screen-game').style.display = 'block';
+  document.getElementById('screen-start').style.display='none';
+  document.getElementById('screen-game').style.display='block';
   document.getElementById('screen-end').classList.add('hidden');
 
-  resetLifelineButtons();
+  ['ll-fifty','ll-phone','ll-audience'].forEach(id=>{ document.getElementById(id).disabled=false; });
   buildLadder();
   loadQuestion();
 }
 
-function resetLifelineButtons() {
-  document.getElementById('ll-fifty').disabled = false;
-  document.getElementById('ll-phone').disabled = false;
-  document.getElementById('ll-audience').disabled = false;
-}
-
+// ── LADDER ───────────────────────────────────────────────
 function buildLadder() {
-  const ladder = document.getElementById('prize-ladder');
-  ladder.innerHTML = '';
-  for (let i = PRIZES.length - 1; i >= 0; i--) {
-    const item = document.createElement('div');
-    item.className = 'ladder-item' + (MILESTONES.includes(i) ? ' milestone' : '') + (i === currentQ ? ' current' : '') + (i < currentQ ? ' passed' : '');
-    item.id = `ladder-${i}`;
-    item.innerHTML = `<span class="ladder-num">${i + 1}</span><span>${PRIZES[i]}</span>`;
-    ladder.appendChild(item);
+  const ladder=document.getElementById('prize-ladder');
+  ladder.innerHTML='';
+  for(let i=PRIZES.length-1;i>=0;i--) {
+    const el=document.createElement('div');
+    el.id=`ladder-${i}`;
+    el.className='ladder-item'+(MILESTONES.includes(i)?' milestone':'')+(i===currentQ?' current':'')+(i<currentQ?' passed':'');
+    el.innerHTML=`<span class="ladder-num">${i+1}</span><span>${PRIZES[i]}</span>`;
+    ladder.appendChild(el);
   }
 }
 
 function updateLadder() {
-  for (let i = 0; i < PRIZES.length; i++) {
-    const item = document.getElementById(`ladder-${i}`);
-    if (!item) continue;
-    item.className = 'ladder-item' + (MILESTONES.includes(i) ? ' milestone' : '') + (i === currentQ ? ' current' : '') + (i < currentQ ? ' passed' : '');
+  for(let i=0;i<PRIZES.length;i++) {
+    const el=document.getElementById(`ladder-${i}`);
+    if(!el) continue;
+    el.className='ladder-item'+(MILESTONES.includes(i)?' milestone':'')+(i===currentQ?' current':'')+(i<currentQ?' passed':'');
   }
 }
 
+// ── LOAD QUESTION ────────────────────────────────────────
 function loadQuestion() {
-  answered = false;
-  selectedBtn = null;
+  answered=false;
   hidePanels();
-
-  const q = ALL_QUESTIONS[currentQ];
-  document.getElementById('question-number').textContent = `VRAAG ${currentQ + 1} VAN 15`;
-  document.getElementById('question-text').textContent = q.q;
-  document.getElementById('current-prize-display').textContent = PRIZES[currentQ];
-  document.getElementById('guaranteed-prize').textContent = currentQ > 0 ? GUARANTEED[currentQ - 1] : '€0';
-
+  const q=ALL_QUESTIONS[currentQ];
+  document.getElementById('question-number').textContent=`VRAAG ${currentQ+1} VAN 15`;
+  document.getElementById('question-text').textContent=q.q;
+  document.getElementById('current-prize-display').textContent=PRIZES[currentQ];
+  document.getElementById('guaranteed-prize').textContent=currentQ>0?GUARANTEED[currentQ-1]:'€0';
   updateLadder();
 
-  const grid = document.getElementById('answers-grid');
-  grid.innerHTML = '';
-  const letters = ['A', 'B', 'C', 'D'];
-  q.a.forEach((ans, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'answer-btn';
-    btn.id = `ans-${i}`;
-    btn.innerHTML = `<span class="answer-letter">${letters[i]}</span><span>${ans}</span>`;
-    btn.onclick = () => selectAnswer(i);
+  const grid=document.getElementById('answers-grid');
+  grid.innerHTML='';
+  ['A','B','C','D'].forEach((letter,i)=>{
+    const btn=document.createElement('button');
+    btn.className='answer-btn'; btn.id=`ans-${i}`;
+    btn.innerHTML=`<span class="answer-letter">${letter}</span><span>${q.a[i]}</span>`;
+    btn.onclick=()=>selectAnswer(i);
     grid.appendChild(btn);
   });
+  startTimer();
 }
 
+// ── TIMER ────────────────────────────────────────────────
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft=timePerQuestion;
+  renderTimer();
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    SFX.tick(timeLeft);
+    renderTimer();
+    if(timeLeft<=0){ clearInterval(timerInterval); if(!answered) timeUp(); }
+  },1000);
+}
+
+function stopTimer() { clearInterval(timerInterval); }
+
+function renderTimer() {
+  const CIRC=169.6;
+  const arc=document.getElementById('timer-arc');
+  const num=document.getElementById('timer-num');
+  const circle=document.getElementById('timer-circle');
+  const pct=Math.max(0,timeLeft/timePerQuestion);
+  arc.style.strokeDashoffset=CIRC*(1-pct);
+  num.textContent=timeLeft;
+  if(timeLeft<=10){
+    circle.classList.add('timer-urgent');
+  } else if(timeLeft<=Math.floor(timePerQuestion*0.4)){
+    circle.classList.remove('timer-urgent');
+    arc.style.stroke='#ffaa00';
+  } else {
+    circle.classList.remove('timer-urgent');
+    arc.style.stroke='var(--gold)';
+  }
+}
+
+function timeUp() {
+  if(answered) return;
+  answered=true;
+  const q=ALL_QUESTIONS[currentQ];
+  document.querySelectorAll('.answer-btn').forEach(b=>b.disabled=true);
+  document.getElementById(`ans-${q.correct}`).classList.add('correct');
+  SFX.wrong();
+  showOverlay('⏰ TIJD OP!');
+  setTimeout(()=>endGame(false,currentQ>0?GUARANTEED[currentQ-1]:'€0',true),2300);
+}
+
+// ── SELECT ANSWER ────────────────────────────────────────
 function selectAnswer(index) {
-  if (answered) return;
-  answered = true;
+  if(answered) return;
+  answered=true;
+  stopTimer();
   hidePanels();
+  SFX.select();
 
-  const q = ALL_QUESTIONS[currentQ];
-  const btns = document.querySelectorAll('.answer-btn');
-
-  // Highlight selected
+  const q=ALL_QUESTIONS[currentQ];
+  const btns=document.querySelectorAll('.answer-btn');
   btns[index].classList.add('selected');
-  selectedBtn = index;
-  btns.forEach(b => b.disabled = true);
+  btns.forEach(b=>b.disabled=true);
 
-  // Delay to reveal answer
-  setTimeout(() => {
+  setTimeout(()=>{
     btns[index].classList.remove('selected');
-    if (index === q.correct) {
+    if(index===q.correct) {
       btns[index].classList.add('correct');
-      showOverlay('JUIST!');
-      setTimeout(() => {
-        if (currentQ === 14) {
-          endGame(true, PRIZES[14]);
-        } else {
-          currentQ++;
-          loadQuestion();
-        }
-      }, 2200);
+      const ms=MILESTONES.includes(currentQ);
+      ms ? SFX.milestone() : SFX.correct();
+      showOverlay(ms?'🏆 VEILIG!':'JUIST!');
+      setTimeout(()=>{
+        if(currentQ===14){ SFX.millionaire(); endGame(true,PRIZES[14]); }
+        else { currentQ++; loadQuestion(); }
+      },2300);
     } else {
       btns[index].classList.add('wrong');
       btns[q.correct].classList.add('correct');
+      SFX.wrong();
       showOverlay('FOUT!');
-      setTimeout(() => {
-        const guaranteed = currentQ > 0 ? GUARANTEED[currentQ - 1] : '€0';
-        endGame(false, guaranteed);
-      }, 2200);
+      setTimeout(()=>endGame(false,currentQ>0?GUARANTEED[currentQ-1]:'€0'),2300);
     }
-  }, 1200);
+  },1200);
 }
 
+// ── LIFELINES ────────────────────────────────────────────
 function useFiftyFifty() {
-  if (lifelinesUsed.fifty || answered) return;
-  lifelinesUsed.fifty = true;
-  document.getElementById('ll-fifty').disabled = true;
-
-  const q = ALL_QUESTIONS[currentQ];
-  const wrong = [];
-  for (let i = 0; i < 4; i++) { if (i !== q.correct) wrong.push(i); }
-  // Remove 2 random wrong answers
-  wrong.sort(() => Math.random() - 0.5);
-  wrong.slice(0, 2).forEach(i => {
+  if(lifelinesUsed.fifty||answered) return;
+  lifelinesUsed.fifty=true;
+  document.getElementById('ll-fifty').disabled=true;
+  SFX.select();
+  const q=ALL_QUESTIONS[currentQ];
+  shuffle([0,1,2,3].filter(i=>i!==q.correct)).slice(0,2).forEach(i=>{
     document.getElementById(`ans-${i}`).classList.add('hidden-50');
   });
 }
 
 function usePhone() {
-  if (lifelinesUsed.phone || answered) return;
-  lifelinesUsed.phone = true;
-  document.getElementById('ll-phone').disabled = true;
-
-  const q = ALL_QUESTIONS[currentQ];
-  const letters = ['A', 'B', 'C', 'D'];
-  const confidence = Math.random() > 0.3 ? 'vrij zeker' : 'denk ik';
-  const isRight = Math.random() > 0.2;
-  const suggestion = isRight ? q.correct : (q.correct + 1) % 4;
-  const friends = ["Alex", "Sanne", "Bas", "Laura", "Daan"];
-  const friend = friends[Math.floor(Math.random() * friends.length)];
-
-  const panel = document.getElementById('panel-phone');
+  if(lifelinesUsed.phone||answered) return;
+  lifelinesUsed.phone=true;
+  document.getElementById('ll-phone').disabled=true;
+  SFX.select();
+  const q=ALL_QUESTIONS[currentQ];
+  const letters=['A','B','C','D'];
+  const conf=Math.random()>.3?'vrij zeker':'denk ik';
+  const sug=Math.random()>.2?q.correct:(q.correct+1)%4;
+  const friend=["Alex","Sanne","Bas","Laura","Daan","Emma","Tom","Noor"][Math.floor(Math.random()*8)];
+  const panel=document.getElementById('panel-phone');
   panel.classList.remove('hidden');
-  panel.innerHTML = `
-    <div class="phone-title">📞 BEL EEN VRIEND — ${friend.toUpperCase()}</div>
-    <div class="phone-text">"Hé! Oh wow, oké... ik ben ${confidence} dat het <strong style="color:var(--gold)">${letters[suggestion]} — ${q.a[suggestion]}</strong> is. Ik herinner me iets hierover gelezen te hebben. Maar je weet hoe ik ben, ik kan het mis hebben! Veel succes!"</div>
-  `;
+  panel.innerHTML=`<div class="phone-title">📞 BEL EEN VRIEND — ${friend.toUpperCase()}</div>
+    <div class="phone-text">"Hé! Oh wow, oké... ik ben ${conf} dat het <strong style="color:var(--gold)">${letters[sug]} — ${q.a[sug]}</strong> is. Ik herinner me iets hierover gelezen te hebben. Maar je weet hoe ik ben, ik kan het mis hebben! Veel succes!"</div>`;
 }
 
 function useAudience() {
-  if (lifelinesUsed.audience || answered) return;
-  lifelinesUsed.audience = true;
-  document.getElementById('ll-audience').disabled = true;
-
-  const q = ALL_QUESTIONS[currentQ];
-  const letters = ['A', 'B', 'C', 'D'];
-
-  // Generate percentages biased toward correct answer
-  let pcts = [0, 0, 0, 0];
-  pcts[q.correct] = Math.floor(Math.random() * 25) + 50; // 50-74%
-  let rem = 100 - pcts[q.correct];
-  const others = [0, 1, 2, 3].filter(i => i !== q.correct);
-  others.forEach((i, idx) => {
-    if (idx === others.length - 1) { pcts[i] = rem; }
-    else { const v = Math.floor(Math.random() * rem * 0.6); pcts[i] = v; rem -= v; }
+  if(lifelinesUsed.audience||answered) return;
+  lifelinesUsed.audience=true;
+  document.getElementById('ll-audience').disabled=true;
+  SFX.select();
+  const q=ALL_QUESTIONS[currentQ];
+  const letters=['A','B','C','D'];
+  let pcts=[0,0,0,0];
+  pcts[q.correct]=Math.floor(Math.random()*25)+50;
+  let rem=100-pcts[q.correct];
+  const others=shuffle([0,1,2,3].filter(i=>i!==q.correct));
+  others.forEach((idx,pos)=>{
+    if(pos===others.length-1){ pcts[idx]=rem; }
+    else{ const v=Math.floor(Math.random()*rem*0.6); pcts[idx]=v; rem-=v; }
   });
-
-  const panel = document.getElementById('panel-audience');
+  const panel=document.getElementById('panel-audience');
   panel.classList.remove('hidden');
-  panel.innerHTML = `<div class="poll-title">👥 PUBLIEKSVRAAG</div>` +
-    letters.map((l, i) => `
-      <div class="poll-bar-row">
-        <span class="poll-letter">${l}</span>
-        <div class="poll-bar-bg">
-          <div class="poll-bar-fill" style="width:${pcts[i]}%">${pcts[i]}%</div>
-        </div>
-      </div>
-    `).join('');
+  panel.innerHTML=`<div class="poll-title">👥 PUBLIEKSVRAAG</div>`+
+    letters.map((l,i)=>`<div class="poll-bar-row">
+      <span class="poll-letter">${l}</span>
+      <div class="poll-bar-bg"><div class="poll-bar-fill" id="bar-${i}" style="width:0%">${pcts[i]}%</div></div>
+    </div>`).join('');
+  setTimeout(()=>letters.forEach((_,i)=>{ const b=document.getElementById(`bar-${i}`); if(b) b.style.width=pcts[i]+'%'; }),60);
 }
 
 function hidePanels() {
@@ -898,70 +1001,67 @@ function hidePanels() {
   document.getElementById('panel-phone').classList.add('hidden');
 }
 
+// ── WALK AWAY ────────────────────────────────────────────
 function walkAway() {
-  if (!gameActive) return;
-  const guaranteed = currentQ > 0 ? PRIZES[currentQ - 1] : '€0';
-  endGame('walk', guaranteed);
+  if(!gameActive) return;
+  stopTimer();
+  SFX.walk();
+  endGame('walk', currentQ>0?PRIZES[currentQ-1]:'€0');
 }
 
+// ── OVERLAY ──────────────────────────────────────────────
 function showOverlay(text) {
-  const existing = document.querySelector('.overlay-msg');
-  if (existing) existing.remove();
-  const div = document.createElement('div');
-  div.className = 'overlay-msg';
-  div.innerHTML = `<div class="overlay-text">${text}</div>`;
+  document.querySelector('.overlay-msg')?.remove();
+  const div=document.createElement('div');
+  div.className='overlay-msg';
+  div.innerHTML=`<div class="overlay-text">${text}</div>`;
   document.body.appendChild(div);
-  setTimeout(() => div.remove(), 1600);
+  setTimeout(()=>div.remove(),1800);
 }
 
-function endGame(won, prize) {
-  gameActive = false;
-  document.getElementById('screen-game').style.display = 'none';
+// ── END GAME ─────────────────────────────────────────────
+function endGame(won, prize, timedOut=false) {
+  gameActive=false;
+  stopTimer();
+  document.getElementById('screen-game').style.display='none';
   document.getElementById('screen-end').classList.remove('hidden');
-
-  const title = document.getElementById('end-title');
-  const prizeEl = document.getElementById('end-prize');
-  const msg = document.getElementById('end-msg');
-
-  prizeEl.textContent = prize;
-
-  if (won === true) {
-    title.textContent = '🏆 JIJ BENT MILJONAIR! 🏆';
-    msg.textContent = 'Je hebt alle 15 vragen correct beantwoord!';
+  document.getElementById('end-prize').textContent=prize;
+  const diffNames={easy:'Makkelijk',normal:'Normaal',hard:'Moeilijk'};
+  if(won===true){
+    document.getElementById('end-title').textContent='🏆 JIJ BENT MILJONAIR! 🏆';
+    document.getElementById('end-msg').textContent=`Alle 15 vragen correct op ${diffNames[selectedDifficulty]} niveau!`;
     launchConfetti();
-  } else if (won === 'walk') {
-    title.textContent = 'Je Hebt Gestopt';
-    msg.textContent = 'Soms is voorzichtigheid de beste keuze.';
+  } else if(won==='walk'){
+    document.getElementById('end-title').textContent='Je Hebt Gestopt';
+    document.getElementById('end-msg').textContent=`Je stopte bij vraag ${currentQ+1}. Verstandige keuze!`;
+  } else if(timedOut){
+    document.getElementById('end-title').textContent='⏰ Tijd Voorbij!';
+    document.getElementById('end-msg').textContent=`De tijd liep op bij vraag ${currentQ+1}. Je gaat naar huis met je gegarandeerde prijs.`;
   } else {
-    title.textContent = 'Helaas!';
-    msg.textContent = 'Dat was het verkeerde antwoord. Je gaat naar huis met je gegarandeerde prijs.';
+    document.getElementById('end-title').textContent='Helaas!';
+    document.getElementById('end-msg').textContent=`Verkeerd antwoord bij vraag ${currentQ+1}. Je gaat naar huis met je gegarandeerde prijs.`;
   }
 }
 
+// ── CONFETTI ─────────────────────────────────────────────
 function launchConfetti() {
-  const colors = ['#f0c040', '#ffffff', '#0033cc', '#ff4444', '#44ff88'];
-  for (let i = 0; i < 80; i++) {
-    setTimeout(() => {
-      const el = document.createElement('div');
-      el.className = 'confetti-piece';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.background = colors[Math.floor(Math.random() * colors.length)];
-      el.style.animationDuration = (Math.random() * 2 + 2) + 's';
-      el.style.animationDelay = Math.random() * 1 + 's';
-      el.style.width = (Math.random() * 10 + 6) + 'px';
-      el.style.height = (Math.random() * 10 + 6) + 'px';
-      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+  const colors=['#f0c040','#ffffff','#0033cc','#ff4444','#44ff88','#ff88ff','#88ffff'];
+  for(let i=0;i<120;i++) {
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti-piece';
+      el.style.cssText=`left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*2.5+2}s;width:${Math.random()*10+6}px;height:${Math.random()*10+6}px;border-radius:${Math.random()>.5?'50%':'2px'}`;
       document.body.appendChild(el);
-      setTimeout(() => el.remove(), 4000);
-    }, i * 30);
+      setTimeout(()=>el.remove(),5500);
+    },i*22);
   }
 }
 
+// ── RESTART ──────────────────────────────────────────────
 function restartGame() {
   document.getElementById('screen-end').classList.add('hidden');
-  document.getElementById('screen-start').style.display = 'flex';
-  document.getElementById('screen-start').style.flexDirection = 'column';
-  document.getElementById('screen-start').style.alignItems = 'center';
+  const s=document.getElementById('screen-start');
+  s.style.display='flex'; s.style.flexDirection='column'; s.style.alignItems='center';
 }
 </script>
 </body>
